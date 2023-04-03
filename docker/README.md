@@ -14,8 +14,6 @@ wget https://raw.githubusercontent.com/nodesense/kafka/main/docker/.env
 
 wget https://raw.githubusercontent.com/nodesense/kafka/main/docker/common.yml
 
-wget https://raw.githubusercontent.com/nodesense/kafka/main/docker/mysql.yml
- 
 
 wget https://raw.githubusercontent.com/nodesense/kafka/main/docker/postgres.yml
 ```
