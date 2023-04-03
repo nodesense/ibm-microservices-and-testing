@@ -1,10 +1,5 @@
 # Docker Setup
-
-```
-sudo nano /etc/hosts
-```
-
-paste below
+ 
  
  ```
 
