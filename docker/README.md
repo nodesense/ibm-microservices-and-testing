@@ -6,7 +6,7 @@ sudo nano /etc/hosts
 
 paste below
  
-  
+ ```
 
 cd docker
 
