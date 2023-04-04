@@ -13,7 +13,7 @@ mysql password: root
 
 
 ```
-sudo mysql -u root -proot
+mysql -u root -proot
 ```
 
 
