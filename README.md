@@ -1,5 +1,20 @@
 Day by Day Course Materials and Code Sharing here.
 
+# Every Day morning
+
+open terminal 
+
+```
+cd day1
+cd docker
+
+docker compose  -f common.yml -f postgres.yml up
+docker compose  -f common.yml -f mysql.yml up
+
+confluent local start
+```
+
+
 # Quick Links
 
 
@@ -21,6 +36,9 @@ Open Terminal
 ```
 
 git clone https://github.com/nodesense/ibm-microservices-and-testing  day1
+
+
+
 
 
 cd day1
