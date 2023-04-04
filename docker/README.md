@@ -11,10 +11,13 @@ wget https://raw.githubusercontent.com/nodesense/kafka/main/docker/common.yml
 
 
 wget https://raw.githubusercontent.com/nodesense/kafka/main/docker/postgres.yml
+
+wget https://raw.githubusercontent.com/nodesense/kafka/main/docker/mysql.yml
 ```
 
 ```
 docker compose  -f common.yml -f postgres.yml up
+docker compose  -f common.yml -f mysql.yml up
 ```
 
 
