@@ -3,6 +3,14 @@
 # MYSQL Table/Database Setup
 
 
+### Workaround for mysql connection from intelliJ
+
+replace in properties file in jwt project
+
+```
+spring.datasource.url= jdbc:mysql://localhost:3306/ecommerce?allowPublicKeyRetrieval=true&useSSL=false
+```
+
 ## Setup the database 
 
 Now use Portainer console to get into mysql bash..
