@@ -235,3 +235,74 @@ username,password,email
 example1,password,example1@example.com
 admin,admin1234,admin@example.com
 ```
+
+Add collection variables for username, password, email
+
+
+Singin Url
+
+```
+{{base_url}}/api/auth/signin
+```
+
+Signin Request body
+
+```json
+{
+    "username": "{{username}}",
+    "password": "{{password}}"
+}
+```
+
+pre-script
+
+```javascript
+// before sending request, pre-request script is used
+// to initalize test variables, update requests etc
+
+// now take username, email, password from csv 
+const username = pm.iterationData.get("username")
+const password = pm.iterationData.get("password")
+const email = pm.iterationData.get("email")
+
+console.log("data driven, running test for ", username, password, email)
+
+// set the collection variables
+pm.collectionVariables.set("username", username)
+pm.collectionVariables.set("password", password)
+pm.collectionVariables.set("email", email)
+
+// update body with variable {{username}} {{password}}
+
+```
+
+
+
+Test
+
+```
+// to store the refresh and access into collection variable to use in next request
+// schema testing - contract testing done using pact
+
+const payload = pm.response.json()
+  
+
+pm.test("should validate statuscode and content type, response time", function() {
+    pm.response.to.have.header("Content-Type")
+    pm.expect(pm.response.headers.get("Content-Type")).to.eql("application/json")
+    pm.expect(pm.response.responseTime).to.be.below(1000)
+
+    const email = pm.iterationData.get("email") // read from csv
+    // or take email from collection, since we updateed collection in pre-test
+    // const email = pm.collectionVariables.get("email")
+
+    pm.expect(payload.email).to.eql(email)
+
+// now fetch data from response and store to collection variable
+    pm.collectionVariables.set("auth_token", payload.accessToken)
+    pm.collectionVariables.set("refresh_token", payload.refreshToken)
+}) 
+```
+
+Go to run test, select csv file, run the test, observe the iterations
+
