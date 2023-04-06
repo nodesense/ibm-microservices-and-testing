@@ -180,3 +180,24 @@ pm.test("should validate statuscode and content type, response time", function()
 })
  
 ```
+
+## Use new access token to verify all working
+GET
+
+```
+{{base_url}}/api/test/user
+```
+
+HEADER
+
+```
+Authorization: Bearer {{auth_token}} 
+```
+
+Test
+
+```
+pm.test ("should public allowed access content ", function() {
+    pm.expect(pm.response.text()).to.include("User Content.")
+})
+```
