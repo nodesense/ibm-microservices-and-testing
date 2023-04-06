@@ -108,3 +108,18 @@ pm.test("should be valid schema", function () {
 # Schema Validation use below website to generate schema for json
 
 https://www.liquid-technologies.com/online-json-to-schema-converter
+
+# Public content test
+
+```
+{{base_url}}/api/test/all
+```
+
+test script 
+
+```javascript
+
+pm.test ("should public allowed access content ", function() {
+    pm.expect(pm.response.text()).to.include("Public Content.")
+})
+```
