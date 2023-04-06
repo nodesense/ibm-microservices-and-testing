@@ -9,7 +9,19 @@ cd day1
 cd docker
 
 docker compose  -f common.yml -f postgres.yml up
+```
+
+open terminal 
+```
+cd day1
+cd docker
 docker compose  -f common.yml -f mysql.yml up
+
+```
+
+open the terminal
+
+```
 
 confluent local start
 ```
