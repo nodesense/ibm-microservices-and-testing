@@ -60,6 +60,12 @@ confluent local start
 
 3. Portainer Docker UI   https://localhost:9443 
 
+4. Keycloak   http://localhost:8024
+
+        keycloak username: keycloak
+        
+        keycloak password: keycloak
+
 
 Kafka Reference
 
