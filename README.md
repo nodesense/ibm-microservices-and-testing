@@ -3,6 +3,9 @@
 open terminal
 
 ```
+
+cd ~
+
 git clone https://github.com/nodesense/ibm-microservices-and-testing day3
 
 cd day3
