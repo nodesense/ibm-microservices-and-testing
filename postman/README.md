@@ -146,3 +146,37 @@ pm.test ("should public allowed access content ", function() {
 })
 
 ```
+
+
+## Refresh token and update access and refresh again
+
+POST 
+
+```
+{{base_url}}/api/auth/refreshtoken
+```
+
+Request body
+
+```json
+{
+    "refreshToken": "{{refresh_token}}"
+}
+```
+
+Test script
+
+```javascript
+// to store the refresh and access into collection variable to use in next request
+// schema testing - contract testing done using pact
+
+const payload = pm.response.json()
+
+pm.test("should validate statuscode and content type, response time", function() {
+    pm.response.to.have.status(200)
+   // now fetch data from response and store to collection variable
+    pm.collectionVariables.set("auth_token", payload.accessToken)
+    pm.collectionVariables.set("refresh_token", payload.refreshToken)
+})
+ 
+```
