@@ -201,3 +201,16 @@ pm.test ("should public allowed access content ", function() {
     pm.expect(pm.response.text()).to.include("User Content.")
 })
 ```
+
+## Data Driven
+
+0. Create user admin, with admin,mod,user access
+1. Clone the RoleTest
+2. Create a csv file in Ubuntu Desktop called users.csv
+3. Paste below content
+
+```csv
+username,password,email
+example1,password,example1@example.com
+admin,admin1234,admin@example.com
+```
