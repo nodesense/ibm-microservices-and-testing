@@ -123,3 +123,26 @@ pm.test ("should public allowed access content ", function() {
     pm.expect(pm.response.text()).to.include("Public Content.")
 })
 ```
+
+
+# add mod test 
+
+```
+{{base_url}}/api/test/mod
+```
+
+on header, 
+
+```
+Authorization: Bearer {{auth_token}} 
+```
+
+on test 
+
+```test
+
+pm.test ("should public allowed access content ", function() {
+    pm.expect(pm.response.text()).to.include("Moderator Board.")
+})
+
+```
