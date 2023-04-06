@@ -1,0 +1,303 @@
+{
+	"info": {
+		"_postman_id": "9fcff40d-61d1-4b61-abb6-db66319ff102",
+		"name": "RoleTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SignIn",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// to store the refresh and access into collection variable to use in next request",
+							"// schema testing - contract testing done using pact",
+							"",
+							"const payload = pm.response.json()",
+							"// remove $schema entry in copied content",
+							"const schema = {",
+							"  \"type\": \"object\",",
+							"  \"properties\": {",
+							"    \"refreshToken\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"id\": {",
+							"      \"type\": \"integer\"",
+							"    },",
+							"    \"username\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"email\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"roles\": {",
+							"      \"type\": \"array\",",
+							"      \"items\": [",
+							"        {",
+							"          \"type\": \"string\"",
+							"        },",
+							"        {",
+							"          \"type\": \"string\"",
+							"        }",
+							"      ]",
+							"    },",
+							"    \"accessToken\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"tokenType\": {",
+							"      \"type\": \"string\"",
+							"    }",
+							"  },",
+							"  \"required\": [",
+							"    \"refreshToken\",",
+							"    \"id\",",
+							"    \"username\",",
+							"    \"email\",",
+							"    \"roles\",",
+							"    \"accessToken\",",
+							"    \"tokenType\"",
+							"  ]",
+							"}",
+							"",
+							"",
+							"",
+							"pm.test(\"should validate statuscode and content type, response time\", function() {",
+							"    pm.response.to.have.header(\"Content-Type\")",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\")",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)",
+							"    pm.expect(payload.email).to.eql(\"example1@example.com\")",
+							"",
+							"// now fetch data from response and store to collection variable",
+							"    pm.collectionVariables.set(\"auth_token\", payload.accessToken)",
+							"    pm.collectionVariables.set(\"refresh_token\", payload.refreshToken)",
+							"})",
+							"",
+							"pm.test(\"should be valid schema\", function () {",
+							"    // contract testing, not testing the values",
+							"    pm.response.to.have.jsonSchema(schema)",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"example1\",\n    \"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/auth/signin",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ValidatePublicAccess",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"should public allowed access content \", function() {",
+							"    pm.expect(pm.response.text()).to.include(\"Public Content.\")",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/test/all",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"test",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ValidateModeratorAccess",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"should public allowed access content \", function() {",
+							"    pm.expect(pm.response.text()).to.include(\"Moderator Board.\")",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{auth_token}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/test/mod",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"test",
+						"mod"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RefreshToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// to store the refresh and access into collection variable to use in next request",
+							"// schema testing - contract testing done using pact",
+							"",
+							"const payload = pm.response.json()",
+							"",
+							"pm.test(\"should validate statuscode and content type, response time\", function() {",
+							"    pm.response.to.have.status(200)",
+							"   // now fetch data from response and store to collection variable",
+							"    pm.collectionVariables.set(\"auth_token\", payload.accessToken)",
+							"    pm.collectionVariables.set(\"refresh_token\", payload.refreshToken)",
+							"})",
+							" "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"refreshToken\": \"{{refresh_token}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/auth/refreshtoken",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"refreshtoken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ValidateUserAccess",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"should public allowed access content \", function() {",
+							"    pm.expect(pm.response.text()).to.include(\"User Content.\")",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{auth_token}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/test/user",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"test",
+						"user"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "refresh_token",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
