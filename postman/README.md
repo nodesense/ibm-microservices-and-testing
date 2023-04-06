@@ -17,6 +17,27 @@ payload
 }
 ```
 
+
+## Postman Create Admin user
+
+POST
+
+```
+http://localhost:8080/api/auth/signup
+```
+
+payload 
+
+```json
+{
+    "username": "admin",
+    "email": "admin@example.com",
+    "password": "admin1234",
+    "role": ["mod", "user", "admin"]
+}
+
+```
+
 ## Sign in
 
 POST , body type should be raw, content type should be json 
