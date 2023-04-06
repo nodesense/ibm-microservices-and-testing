@@ -13,6 +13,10 @@ cd day3
 
 cd keycloak
 
+unzip keycloak.zip
+
+cd keycloak 
+
 
 ```
 
