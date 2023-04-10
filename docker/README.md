@@ -36,11 +36,19 @@ wget https://raw.githubusercontent.com/nodesense/kafka/main/docker/common.yml
 wget https://raw.githubusercontent.com/nodesense/kafka/main/docker/postgres.yml
 
 wget https://raw.githubusercontent.com/nodesense/kafka/main/docker/mysql.yml
+
+wget https://raw.githubusercontent.com/nodesense/ibm-microservices-and-testing/main/docker/ms.yml
+wget https://raw.githubusercontent.com/nodesense/ibm-microservices-and-testing/main/docker/jaeger.yml
+
+
 ```
 
 ```
 docker compose  -f common.yml -f postgres.yml up
 docker compose  -f common.yml -f mysql.yml up
+
+docker compose  -f common.yml -f jaeger.yml up
+docker compose  -f common.yml -f ms.yml up
 ```
 
 
