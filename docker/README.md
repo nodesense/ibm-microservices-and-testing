@@ -43,6 +43,19 @@ wget https://raw.githubusercontent.com/nodesense/ibm-microservices-and-testing/m
 
 ```
 
+now run docker containres in detached mode,(they run in background) but for the Micro Services, run in terminal mode
+
+```
+docker compose  -f common.yml -f postgres.yml up -d
+docker compose  -f common.yml -f mysql.yml up -d
+
+docker compose  -f common.yml -f jaeger.yml up -d
+docker compose  -f common.yml -f ms.yml up
+```
+
+
+
+You need 4 different terminal to run as they start docker container, runs on terminal, when we press Ctrl C, containers are stopped
 ```
 docker compose  -f common.yml -f postgres.yml up
 docker compose  -f common.yml -f mysql.yml up
