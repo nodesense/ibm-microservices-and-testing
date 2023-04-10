@@ -39,7 +39,7 @@ wget https://raw.githubusercontent.com/nodesense/kafka/main/docker/mysql.yml
 
 wget https://raw.githubusercontent.com/nodesense/ibm-microservices-and-testing/main/docker/ms.yml
 wget https://raw.githubusercontent.com/nodesense/ibm-microservices-and-testing/main/docker/jaeger.yml
-
+wget https://raw.githubusercontent.com/nodesense/ibm-microservices-and-testing/main/docker/kafka.yml
 
 ```
 
@@ -50,6 +50,9 @@ docker compose  -f common.yml -f postgres.yml up -d
 docker compose  -f common.yml -f mysql.yml up -d
 
 docker compose  -f common.yml -f jaeger.yml up -d
+
+docker compose  -f common.yml -f kafka.yml up -d
+
 docker compose  -f common.yml -f ms.yml up
 ```
 
