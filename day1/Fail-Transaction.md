@@ -1,5 +1,7 @@
 # Success Test
 
+Use POST , content raw, JSON
+
 
 ```
 http://localhost:8181/orders
