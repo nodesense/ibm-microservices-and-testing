@@ -1,6 +1,38 @@
 # Success Test
 
 
+```
+http://localhost:8181/orders
+```
+
+```json
+{
+  "customerId": "d215b5f8-0249-4dc5-89a3-51fd148cfb41",
+  "restaurantId": "d215b5f8-0249-4dc5-89a3-51fd148cfb45",
+  "address": {
+    "street": "street_1",
+    "postalCode": "1000AB",
+    "city": "Amsterdam"
+  },
+  "price": 50.00,
+  "items": [
+    {
+      "productId": "d215b5f8-0249-4dc5-89a3-51fd148cfb48",
+      "quantity": 1,
+      "price": 50.00,
+      "subTotal": 50.00
+    }
+  ]
+}
+```
+
+
+use PostMAN GET to validate order completion or rejection
+
+```
+http://localhost:8181/orders/0d823a1a-1804-4700-99a9-1e433a03885c
+```
+
 
 # Failure Part 1
 
