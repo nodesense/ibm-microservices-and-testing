@@ -54,6 +54,8 @@ confluent local start
 # Quick Links
 
 
+0. Jaeger UI  http://0.0.0.0:16686/search
+
 1. Kafka Control Center  http://localhost:9021/clusters
 
 2. Postgres Admin    http://localhost:5050
