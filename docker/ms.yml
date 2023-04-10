@@ -1,0 +1,98 @@
+version: '3.7'
+services:
+  customerservice:
+    container_name: customerservice
+    image: com.food.ordering.system/customer.service:1.0-SNAPSHOT
+    
+    environment:
+      - DB_HOST=postgres
+      - DB_NAME=postgres
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=admin
+      - KAFKA_BROKERS=localhost:9092
+      - SCHEMA_REGISTRY_URL=http://localhost:8081
+      - JAVA_TOOL_OPTIONS=-Djava.security.properties=/layers/paketo-buildpacks_bellsoft-liberica/java-security-properties/java-security.properties -XX:+ExitOnOutOfMemoryError -XX:ActiveProcessorCount=4 -XX:MaxDirectMemorySize=10M -Xmx128709K -XX:MaxMetaspaceSize=144126K -XX:ReservedCodeCacheSize=240M -Xss1M -XX:+UnlockDiagnosticVMOptions -XX:NativeMemoryTracking=summary -XX:+PrintNMTStatistics -Dorg.springframework.cloud.bindings.boot.enable=true -javaagent:/workspace/BOOT-INF/lib/opentelemetry-javaagent-1.24.0.jar
+      - OTEL_SERVICE_NAME=customer-service
+      - OTEL_METRICS_EXPORTER=none
+      - OTEL_TRACES_EXPORTER=jaeger
+      - OTEL_EXPORTER_JAEGER_ENDPOINT=http://jaeger:14250
+      
+    ports:
+      - "8184:8184"
+
+    networks:
+      - ${GLOBAL_NETWORK:-kafka}
+  
+  order-service:
+    container_name: order-service
+    image: com.food.ordering.system/order.service:1.0-SNAPSHOT
+    
+    environment:
+      - DB_HOST=postgres
+      - DB_NAME=postgres
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=admin
+      - KEYCLOAK_AUTH_SERVER=http://localhost:8024/auth
+      - KEYCLOAK_SECRET=oMmW95kTkIebTgSMYHU0jnJQT6K5zGYX
+      - KAFKA_BROKERS=localhost:9092
+      - SCHEMA_REGISTRY_URL=http://localhost:8081
+      - JAVA_TOOL_OPTIONS=-Djava.security.properties=/layers/paketo-buildpacks_bellsoft-liberica/java-security-properties/java-security.properties -XX:+ExitOnOutOfMemoryError -XX:ActiveProcessorCount=4 -XX:MaxDirectMemorySize=10M -Xmx128709K -XX:MaxMetaspaceSize=144126K -XX:ReservedCodeCacheSize=240M -Xss1M -XX:+UnlockDiagnosticVMOptions -XX:NativeMemoryTracking=summary -XX:+PrintNMTStatistics -Dorg.springframework.cloud.bindings.boot.enable=true -javaagent:/workspace/BOOT-INF/lib/opentelemetry-javaagent-1.24.0.jar
+      - OTEL_SERVICE_NAME=order-service
+      - OTEL_METRICS_EXPORTER=none
+      - OTEL_TRACES_EXPORTER=jaeger
+      - OTEL_EXPORTER_JAEGER_ENDPOINT=http://jaeger:14250
+      
+    ports:
+      - "8181:8181"
+
+    networks:
+      - ${GLOBAL_NETWORK:-kafka}
+
+  payment-service:
+    container_name: payment-service
+    image: com.food.ordering.system/payment.service:1.0-SNAPSHOT
+    
+    environment:
+      - DB_HOST=postgres
+      - DB_NAME=postgres
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=admin
+      - KAFKA_BROKERS=localhost:9092
+      - SCHEMA_REGISTRY_URL=http://localhost:8081
+      - JAVA_TOOL_OPTIONS=-Djava.security.properties=/layers/paketo-buildpacks_bellsoft-liberica/java-security-properties/java-security.properties -XX:+ExitOnOutOfMemoryError -XX:ActiveProcessorCount=4 -XX:MaxDirectMemorySize=10M -Xmx128709K -XX:MaxMetaspaceSize=144126K -XX:ReservedCodeCacheSize=240M -Xss1M -XX:+UnlockDiagnosticVMOptions -XX:NativeMemoryTracking=summary -XX:+PrintNMTStatistics -Dorg.springframework.cloud.bindings.boot.enable=true -javaagent:/workspace/BOOT-INF/lib/opentelemetry-javaagent-1.24.0.jar
+      - OTEL_SERVICE_NAME=payment-service
+      - OTEL_METRICS_EXPORTER=none
+      - OTEL_TRACES_EXPORTER=jaeger
+      - OTEL_EXPORTER_JAEGER_ENDPOINT=http://jaeger:14250
+      
+    ports:
+      - "8182:8182"
+
+    networks:
+      - ${GLOBAL_NETWORK:-kafka}
+ 
+
+  restaurant-service:
+    container_name: restaurant-service
+    image: com.food.ordering.system/restaurant.service:1.0-SNAPSHOT
+    
+    environment:
+      - DB_HOST=postgres
+      - DB_NAME=postgres
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=admin
+      - KAFKA_BROKERS=localhost:9092
+      - SCHEMA_REGISTRY_URL=http://localhost:8081
+      - JAVA_TOOL_OPTIONS=-Djava.security.properties=/layers/paketo-buildpacks_bellsoft-liberica/java-security-properties/java-security.properties -XX:+ExitOnOutOfMemoryError -XX:ActiveProcessorCount=4 -XX:MaxDirectMemorySize=10M -Xmx128709K -XX:MaxMetaspaceSize=144126K -XX:ReservedCodeCacheSize=240M -Xss1M -XX:+UnlockDiagnosticVMOptions -XX:NativeMemoryTracking=summary -XX:+PrintNMTStatistics -Dorg.springframework.cloud.bindings.boot.enable=true -javaagent:/workspace/BOOT-INF/lib/opentelemetry-javaagent-1.24.0.jar
+      - OTEL_SERVICE_NAME=restaurant-service
+      - OTEL_METRICS_EXPORTER=none
+      - OTEL_TRACES_EXPORTER=jaeger
+      - OTEL_EXPORTER_JAEGER_ENDPOINT=http://jaeger:14250
+      
+    ports:
+      - "8183:8183"
+
+    networks:
+      - ${GLOBAL_NETWORK:-kafka}
+ 
+      
