@@ -61,6 +61,15 @@ java -jar ./microservicetwo/target/microservicetwo-0.0.1-SNAPSHOT.jar
 
 
 new terminal 
+```
+export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64
+
+ 
+
+java -jar ./microservicethree/target/microservicethree-0.0.1-SNAPSHOT.jar
+```
+
+new terminal 
 
 ```
 export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64
