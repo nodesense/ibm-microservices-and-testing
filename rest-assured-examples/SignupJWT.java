@@ -1,5 +1,3 @@
-```java
-
 package data.reqres;
 
 import lombok.Data;
@@ -21,5 +19,3 @@ public class SignupJWT {
         this.role = role;
     }
 }
-
-```
