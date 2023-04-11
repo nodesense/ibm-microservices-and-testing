@@ -19,6 +19,23 @@ open new terminal
 ./gradlew consumer:copyPacts
 ```
 
+files shall be copied   
+Copy the updated contract located in `consumer/build/pacts/FrontendApplication-ProductService.json` to `provider/src/test/resources/pacts/FrontendApplication-Productservice.json` by running the command:
+
+
+
+Changer provider test to refer local folder, instead of broker
+```
+
+@PactFolder("pacts")
+//@PactBroker(
+//        host = "localhost",
+//        port = "9292",
+//        authentication = @PactBrokerAuth(username = "pact_workshop", password = "pact_workshop")
+//)
+
+```
+
 open new terminal
 
 ```
