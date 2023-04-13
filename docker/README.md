@@ -53,6 +53,9 @@ docker compose  -f common.yml -f jaeger.yml up -d
 
 docker compose  -f common.yml -f kafka.yml up -d
 
+
+docker compose  -f common.yml -f keycloak.yml up -d
+
 docker compose  -f common.yml -f ms.yml up
 ```
 
