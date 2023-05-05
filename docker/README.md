@@ -9,7 +9,9 @@
  Open terminal, run the command in any directory
  
  ```
-  docker volume create portainer_data2x
+ 
+ 
+ docker volume create portainer_data2x
  ```
  
  ```
@@ -25,6 +27,8 @@ docker run -d -p 8000:8000 -p 9443:9443 --name portainer2x \
  
  
  ```
+
+mkdir docker
 
 cd docker
 
